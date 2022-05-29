@@ -6,6 +6,7 @@
 #include <QProcess>
 #include <QQmlApplicationEngine>
 #include <QTimer>
+class RoomController;
 
 class GUI_Controller : public QObject {
     Q_OBJECT
@@ -28,4 +29,5 @@ private:
     bool m_isInitialized = false;
     QTimer m_initStartTimer;
     QQmlApplicationEngine *m_engine;
+    RoomController *m_roomController;
 };

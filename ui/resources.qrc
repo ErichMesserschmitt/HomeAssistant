@@ -9,5 +9,7 @@
         <file>Views/MainView.qml</file>
         <file>Items/CustomButton.qml</file>
         <file>Items/InfoBlock.qml</file>
+        <file>../src/roomcontroller.cpp</file>
+        <file>../src/roomcontroller.h</file>
     </qresource>
 </RCC>

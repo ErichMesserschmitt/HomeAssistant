@@ -1,8 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.0
-import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.2
-import QtQuick.Dialogs 1.3
+import QtQuick.Dialogs
 import QtQuick.Controls 2.12
 import "../Components"
 
@@ -83,7 +82,7 @@ Rectangle {
         ColumnLayout {
             Layout.fillHeight: true;
             Layout.fillWidth: false;
-            Layout.preferredHeight: root.height * 0.25
+            Layout.preferredWidth: root.height * 0.25
             spacing: 0
             CustomButton {
                 Layout.fillHeight: false;
@@ -113,6 +112,7 @@ Rectangle {
                 color: Style.orange
                 radius: 0
                 borderWidth: 0
+                isHorizontal: false;
                 text: "Edit"
                 fontFamily: Style.fontMain.name
                 textColor: Style.white

@@ -1,9 +1,9 @@
 import QtQuick 2.12
 import QtQuick.Window 2.0
-import QtQuick.Controls 1.0
+import QtQuick.Controls
 import QtQuick.Layouts 1.2
-import QtQuick.Dialogs 1.3
-import QtQuick.Controls 2.12
+import QtQuick.Dialogs
+//import QtQuick.Controls
 import "../Components"
 
 AbstractButton {
@@ -13,6 +13,7 @@ AbstractButton {
     readonly property color realBorderColor: root.pressed ? Qt.darker(root.borderColor, 0.9) : root.borderColor
     property color textColor: Style.black
     property color borderColor: Style.grey
+    property bool isHorizontal: true
 
     onPressed: {
         console.log("CustomButton isPressed", pressed)
@@ -57,9 +58,11 @@ AbstractButton {
                 color: root.textColor
                 text: root.text
                 visible: root.text.length > 0
+
                 font.pointSize: root.fontSize
                 font.family: root.fontFamily
                 wrapMode: Text.WordWrap
+                rotation: root.isHorizontal ? 0 : -90
 
             }
         }

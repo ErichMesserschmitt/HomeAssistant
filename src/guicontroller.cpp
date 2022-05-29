@@ -1,4 +1,5 @@
 #include "guicontroller.h"
+#include "roomcontroller.h"
 #include <QDebug>
 #include <QGuiApplication>
 #include <QDebug>
@@ -9,8 +10,11 @@
 GUI_Controller::GUI_Controller(QObject *parent) : QObject(parent)
 {
     m_engine = new QQmlApplicationEngine(parent);
+    m_roomController = new RoomController(this);
+
     QQmlContext *ctx = m_engine->rootContext();
     ctx->setContextProperty(QStringLiteral("_appController"), this);
+    ctx->setContextProperty(QStringLiteral("_roomController"), m_roomController);
     m_engine->addImportPath("qrc:/recources");
 
 

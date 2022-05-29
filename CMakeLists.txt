@@ -1,6 +1,6 @@
 project (HomeAssistant LANGUAGES CXX)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
+cmake_minimum_required(VERSION 3.9)
 set(CMAKE_AUTOMOC ON)
 
 macro(print_all_variables)
@@ -15,16 +15,19 @@ endmacro()
 FILE(GLOB SOURCE_FILES
     src/*.cpp
     src/*.h
+    src/DataClasses/*.cpp
+    src/DataClasses/*.h
+    src/Serialization/*.cpp
+    src/Serialization/*.h
     )
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
-find_package(Qt5 COMPONENTS Core Quick Qml Concurrent Widgets Multimedia REQUIRED)
-find_package(Qt5QuickCompiler)
+find_package(Qt6 COMPONENTS Core Quick Qml Concurrent Widgets Multimedia REQUIRED)
+find_package(Qt6QuickCompiler)
 
-qt5_add_resources(RESOURCES ui/resources.qrc)
-qt5_add_resources(RESOURCES ui/images.qrc)
+qt6_add_resources(RESOURCES ui/resources.qrc)
+qt6_add_resources(RESOURCES ui/images.qrc)
 
-#qtquick_compiler_add_resources(RESOURCES ui/resources.qrc)
 
 add_executable(${PROJECT_NAME}
     ${SOURCE_FILES}
@@ -32,12 +35,12 @@ add_executable(${PROJECT_NAME}
     )
 
 target_link_libraries(${PROJECT_NAME}
-    Qt5::Core
-    Qt5::Quick
-    Qt5::Qml
-    Qt5::Concurrent
-    Qt5::Widgets
-    Qt5::Multimedia
+    Qt6::Core
+    Qt6::Quick
+    Qt6::Qml
+    Qt6::Concurrent
+    Qt6::Widgets
+    Qt6::Multimedia
 )
 
 set(QML_DIR ui)
