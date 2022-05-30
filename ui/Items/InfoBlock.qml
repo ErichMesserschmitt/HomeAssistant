@@ -81,9 +81,9 @@ Rectangle {
         }
         ColumnLayout {
             Layout.fillHeight: true;
-            Layout.fillWidth: false;
-            Layout.preferredWidth: root.height * 0.25
-            spacing: 0
+            Layout.fillWidth: true;
+            //Layout.minimumWidth: root.height * 0.25
+            spacing: 1
             CustomButton {
                 Layout.fillHeight: false;
                 Layout.preferredHeight: root.height / 6
@@ -145,7 +145,5 @@ Rectangle {
             }
         }
     }
-
-
 }
 

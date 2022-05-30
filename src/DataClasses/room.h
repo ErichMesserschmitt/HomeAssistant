@@ -1,21 +1,37 @@
 #pragma once
-
+#include "component.h"
 #include <QObject>
 #include <iostream>
 #include <vector>
 #include <QTimer>
 
 
-class Component;
 
 class Room : public QObject {
     Q_OBJECT
 public:
+    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
+public:
+    Room(QObject* parent = nullptr);
+    Room(const Room& other):
+        QObject(other.parent())
+    {
+    }
+    Room& operator=(const Room& other){
+        return *this;
+    }
 
 public:
-    explicit Room(QObject* parent = nullptr);
-
+    void setIndex(int index);
+    void setName(QString& name);
     void addComponent(Component& component);
+
+    QString name() {
+        return m_name;
+    }
+
+signals:
+    void nameChanged();
 private:
     bool checkIndex(int index);
 

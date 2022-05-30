@@ -43,11 +43,8 @@ QtObject {
     readonly property color semiTransparentOrange: "#33FFA500"
     readonly property color lightOrange: "#44F67511"
 
-    readonly property var phaseColor: [red, yellow, blue]
-
     readonly property int defaultRadius: 5
     readonly property int defaultWidth: 4
-
 
     readonly property string fontFamily: "Droid Sans"
     readonly property var fontMain: FontLoader { id: fontMainLoader; source: "../fonts/Koulen-Regular.ttf" }

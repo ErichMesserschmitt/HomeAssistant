@@ -11,5 +11,6 @@
         <file>Items/InfoBlock.qml</file>
         <file>../src/roomcontroller.cpp</file>
         <file>../src/roomcontroller.h</file>
+        <file>Popups/SelectName.qml</file>
     </qresource>
 </RCC>

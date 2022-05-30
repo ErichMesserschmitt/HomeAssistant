@@ -10,8 +10,8 @@ import "Views"
 Window {
     id: root
     visible: true
-    width: Screen.width
-    height: Screen.height
+    width: Screen.width - 100
+    height: Screen.height - 200
 
 
     StackView {

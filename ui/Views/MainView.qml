@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Dialogs
 import "../Components"
 import "../Items"
+import "../Popups"
 
 Item {
     id: root
@@ -61,17 +62,30 @@ Item {
             Layout.preferredHeight: root.height * 0.1
             Layout.fillWidth: true;
             Repeater {
-                model: 4
+                model:  _roomController ? _roomController.rooms : 0
                 CustomButton {
                     Layout.fillHeight: true;
                     Layout.fillWidth: true;
-                    text: "Room" + index
+                    readonly property bool roomSelected: _roomController.rooms.length > 0 && index === _roomController.selectedRoom ? true : false
+                    color: roomSelected ? Style.white : Style.semiTransparent
+
+                    borderColor: roomSelected ? Style.darkOrange : Style.semiTransparentGrey
+                    text: _roomController.rooms[index].name
+                    onClicked: {
+                        _roomController.selectedRoom = index
+                    }
                 }
             }
             CustomButton {
+                id: addRoom
                 Layout.fillHeight: true;
-                Layout.fillWidth: true;
+                Layout.fillWidth: false;
+                Layout.preferredWidth: height
                 text: "+"
+                onClicked: {
+                    _roomController.addRoom("Test room");
+                    editRoomNamePopup.open()
+                }
             }
         }
 
@@ -83,24 +97,34 @@ Item {
             rows: blockRepeater.model / columns
             columns: contentWidth / root.minSize
             columnSpacing: 2
-            onRowsChanged: {
-                console.log("ROW", rows, contentWidth)
-            }
-
-            onColumnsChanged: {
-                console.log("COL", columns, contentWidth)
-            }
 
             Repeater {
                 id: blockRepeater
-                model: 4
+                model: 0//_roomController ? _roomController.rooms : 0
                 InfoBlock {
                     Layout.fillHeight: true;
-                    Layout.maximumHeight: modulesGrid.contentWidth * 0.25 - (modulesGrid.columnSpacing * 3)
+                    Layout.maximumHeight: Math.max(modulesGrid.contentWidth * 0.25 - (modulesGrid.columnSpacing * 3), root.minSize)
                     Layout.minimumHeight: root.minSize
                     Layout.minimumWidth: root.minSize
                     Layout.fillWidth: true;
                     Layout.preferredWidth: height
+                    name: ""//_roomController.rooms[index].name
+                }
+            }
+            CustomButton {
+                Layout.fillHeight: true;
+                Layout.maximumHeight: Math.max(modulesGrid.contentWidth * 0.25 - (modulesGrid.columnSpacing * 3), root.minSize)
+                Layout.minimumHeight: root.minSize
+                Layout.minimumWidth: root.minSize
+                Layout.fillWidth: true;
+                Layout.preferredWidth: height
+                text: "+"
+                color: Style.semiTransparent
+                borderColor: Style.semiTransparentGrey
+                textColor: Style.white
+                radius: Style.defaultRadius
+                onClicked: {
+                    console.log("adding component")
                 }
             }
         }
@@ -132,6 +156,35 @@ Item {
                 color: Style.red
                 image: Style.trashcan
             }
+        }
+    }
+    Popup {
+        id: editRoomNamePopup
+        width: root.width
+        height: root.height
+        modal: true
+        dim: true
+        focus: true
+        background: Rectangle {
+            color: Style.transparent
+        }
+
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+        onOpened: {
+
+        }
+
+        contentItem: SelectName {
+            id: updateInfoPopup
+            onAccepted: {
+                console.log("CLOSED", name)
+                editRoomNamePopup.close();
+            }
+            onDeclined:{
+                console.log("CLOSED")
+                editRoomNamePopup.close();
+            }
+
         }
     }
 

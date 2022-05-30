@@ -9,15 +9,11 @@ import "../Components"
 AbstractButton {
     id: root;
     property color color: Style.white
-    readonly property color realColor: root.pressed ? Qt.darker(root.color, 1.3) : root.color
+    readonly property color realColor: root.pressed ? root.color === Style.semiTransparent ? Style.darkGrey : Qt.darker(root.color, 1.3) : root.color
     readonly property color realBorderColor: root.pressed ? Qt.darker(root.borderColor, 0.9) : root.borderColor
     property color textColor: Style.black
     property color borderColor: Style.grey
     property bool isHorizontal: true
-
-    onPressed: {
-        console.log("CustomButton isPressed", pressed)
-    }
 
     property int borderWidth: Style.defaultWidth
     property int radius: Style.defaultRadius
