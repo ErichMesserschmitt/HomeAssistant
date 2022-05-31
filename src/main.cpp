@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     try{
         QGuiApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
         QGuiApplication::setOrganizationName(QStringLiteral("bvovc"));
-        QGuiApplication::setApplicationName(QStringLiteral("Home Assistant Client"));
+        QGuiApplication::setApplicationName(QStringLiteral("Home Pal Client"));
         QGuiApplication app(argc, argv);
         GUI_Controller c(&app);
         res = QGuiApplication::exec();

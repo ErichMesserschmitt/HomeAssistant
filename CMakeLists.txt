@@ -1,4 +1,4 @@
-project (HomePal LANGUAGES CXX)
+project (HomePalClient LANGUAGES CXX)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 cmake_minimum_required(VERSION 3.9)
 set(CMAKE_AUTOMOC ON)
@@ -19,11 +19,13 @@ FILE(GLOB SOURCE_FILES
     src/DataClasses/*.h
     src/Serialization/*.cpp
     src/Serialization/*.h
+    src/Connection/*.cpp
+    src/Connection/*.h
     )
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
-find_package(Qt6 COMPONENTS Core Quick Qml Concurrent Widgets Multimedia REQUIRED)
-find_package(Qt6QuickCompiler)
+find_package(Qt6 COMPONENTS Core Quick Qml Concurrent Widgets Multimedia WebSockets REQUIRED)
+#find_package(Qt6QuickCompiler)
 
 qt6_add_resources(RESOURCES ui/resources.qrc)
 qt6_add_resources(RESOURCES ui/images.qrc)
@@ -41,6 +43,7 @@ target_link_libraries(${PROJECT_NAME}
     Qt6::Concurrent
     Qt6::Widgets
     Qt6::Multimedia
+    Qt6::WebSockets
 )
 
 set(QML_DIR ui)
